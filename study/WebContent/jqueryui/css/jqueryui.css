@@ -1,0 +1,10 @@
+body{
+	font-size :62.5%;
+}
+*{margin : 0px; padding : 0px;}
+.item{margin : 3px ; padding:5px;}
+.item > img {width : 100px ; height : 100px;}
+#wrap{overflow : hidden;}
+#wrap > div{float : left;}
+#dock{position : fixed ; min-height:120px; width:100%; bottom : 0px; z-index:1;}
+#dock > div {float : right;}

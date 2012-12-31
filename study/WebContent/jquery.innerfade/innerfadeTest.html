@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script src='http://code.jquery.com/jquery-1.8.2.min.js'></script>
+<script type="text/javascript" src="js/jquery.innerfade.js"></script>
+
+<script>
+$(document).ready(function(){
+	$('#test').innerfade({
+		animationtype: 'fade',
+		speed: 750,
+		timeout: 2000,
+		type: 'random',
+		containerheight: '1em'
+	});
+});
+</script>
+</head>
+<body>
+<div id='test'>
+	<img src='images/IMG_1.jpg'/>
+	<img src='images/IMG_2.jpg'/>
+	<img src='images/IMG_3.jpg'/>
+	<img src='images/IMG_4.jpg'/>
+	<img src='images/IMG_5.jpg'/>
+	<img src='images/IMG_6.jpg'/>
+	<img src='images/IMG_7.jpg'/>
+	<img src='images/IMG_8.jpg'/>
+</div>
+</body>
+</html>

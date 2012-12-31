@@ -1,0 +1,10 @@
+div{
+	float : left;
+}
+.active{
+	border : 20px solid gray;
+	border-radius : 25px;
+}
+.radius{
+	border-radius : 25px;
+}

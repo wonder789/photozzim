@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<link rel='stylesheet' href='http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css' type='text/css'/>
+<script src='http://code.jquery.com/jquery-1.8.3.min.js' type='text/javascript'></script>
+<script src='http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.js' type='text/javascript'></script>
+</head>
+<body>
+<section id='page1' data-role='page'>
+<header data-role='header'><h1>jQuery Mobile</h1></header>
+<div class='content' data-role='content'>
+<p>First Page!</p>
+<p><a href='#page2'>Go to the Second Page</a>
+</div>
+<footer data-role='footer'><h1>O'Reilly</h1></footer>
+</section>
+<section id='page2' data-role='page' data-add-back-btn='true'>
+<header data-role='header'><h1>jQuery Mbile</h1></header>
+<div class='content' data-role='content'>
+<p>Second Page</p>
+</div>
+<footer data-role='footer'><h1>O ' Relly</h1></footer>
+</section>
+<section id='page2' data-role='page' data-add-back-btn='true'>
+<header data-role='header'><h1>jQuery Mobile</h1></header>
+<div data-role='content' class='content'>
+<p>Second Page</p>
+<p><a href='#page3'>Go to Third Page</a>
+</div>
+<footer data-role='footer'><h1>O'Relly</h1></footer>
+</section>
+
+<section id='page3' data-role='page' data-add-back-btn='true'>
+<header data-role='header'><h1>jQue Mobile</h1></header>
+<div data-role='content' class='content'>
+<p>Third page</p>
+<p><a href='#page1'>Go back to First Page</a>
+<p><a href='Test1.html' data-prefetch='true'>External page</a>
+</div>
+<footer data-role='footer'><h1>O'Relly</h1></footer>
+</section>
+</body>
+</html>

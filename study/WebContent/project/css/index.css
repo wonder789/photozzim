@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+.title{
+	padding : 5px;
+}
+header {
+	margin-bottom : 20px;	
+	background : #CEECF5;
+	width  :100%;
+}
+body{
+}
+section{
+	width : 60%;
+/* 	float : left; */
+	margin-bottom : 50px;
+}
+aside {
+	border : 1px solid red;
+	width  : 35%;
+	float  : left;
+	margin-left : 50px;
+}
+footer{
+	clear  :left;
+	width : 100%;
+	border : 1px solid red;
+}
+.thumb{
+	width : 300px;
+	height : 300px;	
+}
+/* .animation{
+	width : 300px;
+	height  :300px;
+} */
