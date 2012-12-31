@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: Ziso
-Build-Jdk: 1.7.0_06
+Built-By: ziso
+Build-Jdk: 1.7.0_10
 Created-By: Maven Integration for Eclipse
 
