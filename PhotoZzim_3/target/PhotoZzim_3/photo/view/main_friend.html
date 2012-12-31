@@ -1,0 +1,15 @@
+ {{#this}}
+ {{#fPsCheck fPs}}
+ 	<div class='box friend disable'>
+ {{else}}
+  	<div class='box friend'>
+ {{/fPsCheck}}
+  		<a href='#f_image' class='thumbnail'>
+  			<img src='https://graph.facebook.com/{{fId}}/picture'>
+  		</a>
+  		<a href='#f_name'>
+  			{{name}}
+  		</a>
+  		<a href='#f_ban'></a>
+  	</div>
+ {{/this}}

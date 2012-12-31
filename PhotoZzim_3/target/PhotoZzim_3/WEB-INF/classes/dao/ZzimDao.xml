@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ZzimDao">
+	<insert id="addZzim" parameterType="zzim">
+	    insert into P_ZZIM(P_ID,U_ID)
+		    values(#{pId},#{uId})
+	</insert>
+	<select id="getZzim" parameterType="String" resultType="zzim">
+	    select z_id as zId, p_id as pId, u_id as uId, z_ps as zPs
+	    from P_ZZIM where u_id = #{uId}
+	</select>
+	<select id='getZzimAll' resultType='zzim'>
+	    select P_ID as pId, U_ID as uId
+	    from P_ZZIM
+	</select>
+	<delete id='removeZzim' >
+	    delete from P_ZZIM 
+	    where U_ID = #{uid} AND
+	     P_ID = (select P_ID from PHOTO
+	     		where P_PATH = #{pPath})
+	</delete>
+	
+</mapper>

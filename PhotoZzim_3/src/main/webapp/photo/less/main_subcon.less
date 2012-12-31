@@ -1,0 +1,122 @@
+.sub-container{
+	
+	width: 254px;
+	border: 1px solid #DDD;
+	height: 540px;
+	z-index: 100;
+	background: white;
+	position: fixed;
+	top: 100px;
+	border-radius: 10px;
+	box-shadow: 3px 3px 15px #BBB9AF;
+	left 	  : -267px;
+	padding   : 10px;	
+		
+			header {
+				overflow : hidden;
+				a[href*=add_]{
+					float          : right;
+					vertical-align : middle;
+					background 	   : url('../img/plus.png') no-repeat;
+					width 	       : 16px;
+					height	       : 16px;
+				}	
+				span{
+					color		 : rgba(241, 48, 21, 0.7);
+					font-size 	 : 16px;
+					float	  	 : right;
+					margin-right : 5px;
+				}
+			}
+			.wrap{
+				height 	   : 500px;
+				overflow-y : scroll;
+			}
+		
+		input[type=text].search-query{
+			display : none;
+		}
+		.popover{
+			position:fixed;
+			width  : 150px;
+			h3{
+				float : none;
+				color : white
+			}
+			.popover-title{
+				background : #F71805;
+			}
+			.popover-content{
+				div{
+					line-height : 0;
+				}				
+			 	padding : 7px; 
+			 	a{
+			 		margin: 7px 0;
+					margin-left: 7px;
+			 	}
+			}
+		}
+		 div.box{
+		 
+		 	&.disable{
+		 		opacity : .5;
+		 		a{
+		 			color : black;
+			 		&:hover{
+			 			text-decoration : none;
+			 			color           : black;
+			 			cursor			: default;
+			 		}
+		 		}
+		 	}
+		 	clear : left;
+            line-height    : 50px;
+            border-bottom  : 1px solid @basicBorderColor;
+            padding : 7px 0;
+            overflow : hidden;
+	            a[href*=f_ban]{
+	            	-webkit-transition-duration : .7s;
+	            	background: url('../img/Banned.png') no-repeat;
+					width: 16px;
+					height: 16px;
+					display: inline-block;
+					float: right;
+					margin-top: 20px;
+					opacity : 0;
+					&.active{
+						opacity : 1;
+						&:hover{
+							-webkit-transform : scale(1.1);
+						}
+					}
+	            }
+            a.thumbnail { 
+                float : left;
+                margin-right : 15px;
+                img{
+                	width : 50px;
+                	height : 50px;
+                }
+            }
+            .mine{
+            	color : #2756EC;
+            }
+        }
+        .tooltip{
+        	top : 85px;
+        	line-height : 20px;
+        	position : fixed;
+        	.tooltip-arrow{
+	        	border-right-color: #CC723D;
+        		left : 1px;
+        	}
+        	.tooltip-inner{
+	        	background : #CC723D;
+        		font-weight : bold;
+        	}
+         }
+	&.active{
+		left : 0%;
+	}
+}

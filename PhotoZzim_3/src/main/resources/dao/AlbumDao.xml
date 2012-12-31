@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.AlbumDao">
+	<select id="loadUserAlbum" parameterType="string" resultType="hashmap">
+	    select 
+	    a.A_ID as aId
+	  , a.TITLE
+	  , a.U_ID3 as uId
+	  , a.A_PS as aPs
+	  , p.P_PATH as pPath 
+	  ,a.AP_DATA as apData
+		from ALBUM a join PHOTO p 
+		on p.P_ID = a.A_PID
+		where U_ID3 = #{uId}
+	</select>
+	
+    <select id="loadFriendAlbum" parameterType="string" resultType="album">
+        select A_ID as aId, TITLE, U_ID3 as uId, A_PS
+		from ALBUM where U_ID3 IN (select F_ID from FRIEND where U_NO = #{uId}) and A_PS = 1
+    </select>
+    
+    <insert id="createAlbum" parameterType="album">
+    	insert ALBUM(TITLE, U_ID3, A_PS, A_PID , AP_DATA ) values(#{title},#{uId},#{aPs},#{aPid},#{apData})    
+    </insert>
+    
+    <update id='updateAlbum' parameterType='album'>
+        update ALBUM
+		set TITLE = #{title}
+	 ,  A_PID = #{aPid}
+	 ,  ap_Data = #{apData}
+	 	where A_ID = #{aId} 
+    </update>
+    
+    <delete id="removeAlbum" parameterType="album">
+        delete from ALBUM 
+        where A_ID = #{aId}
+    </delete>
+    
+    <insert id="addAlbumPhoto">
+      update ALBUM set A_PID = #{pId} 
+		where A_ID = #{uId};
+    </insert>
+    
+    <update id="updateAps" parameterType="album">
+        update ALBUM set A_PS = #{aPs} 
+        where A_Id = #{aId}
+    </update>
+    
+    <select id="exiestApid" parameterType="int" resultType="string">
+        select A_PID from ALBUM where A_ID = #{aId}
+    </select>
+    
+    
+</mapper>

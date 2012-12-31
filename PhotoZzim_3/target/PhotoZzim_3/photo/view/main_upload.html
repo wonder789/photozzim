@@ -1,0 +1,42 @@
+<div class='upload-container'>
+	<div class='uploadProgress progress progress-danger'>
+		<div class="bar" ></div>
+	</div>
+		<div class="dropbox">
+			<ul class="thumbnails">
+			</ul>		
+		    <span class="message">Drop images here to upload. <br /><i>(they will only be visible to you)</i></span> 
+		<input type="file" id="fileElem" multiple accept="image/*" style="display:none" > 
+		</div>
+		<div>
+			<a id='uploadButton' class='btn btn-info' href='#upload'>
+				<i class='icon-upload icon-white'></i>
+					<span class='divider'></span>
+						업로드</a>
+			<a id='uploadGroupButton' class='btn btn-info' href='#uploadGroup'>
+				<i class='icon-upload icon-white'></i>
+					<span class='divider'></span>
+						업로드 및 그룹공유</a>		
+			<a id='resetButton' class='btn btn-info' href='#removeitem'>
+				<i class='icon-retweet icon-white'></i>
+					<span class='divider'></span>
+						초기화</a>
+		</div>
+			<div class="modal hide fade" id='g_photoadd'>
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>그룹 사진 업로드</h3>
+			  </div>
+			  <div class="modal-body">
+				  <form class='groupList'>
+				  </form>
+			    <div class='namebox'></div>
+			  </div>
+			  <div class="modal-footer">
+			    <a href="#g_photoclose" class="btn btn-primary">닫기</a>
+			    <a href="#g_photoadd" class="btn btn-primary">그룹 사진 추가</a>
+			  </div>
+		</div>
+</div>
+
+

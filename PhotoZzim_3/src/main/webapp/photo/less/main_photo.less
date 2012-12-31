@@ -1,0 +1,59 @@
+.photo-container{
+    padding : 20px;
+    min-height : 700px;
+    margin  : 0;
+	
+    }
+    .thumbnails{
+        margin : 0 auto;
+        	.ui-selected.thumbnail {
+        		background : yellow;
+        		border-radius : 15px;
+        		 p{
+            		color: rgba(255, 235, 5, 0.86);
+            	}
+        	}
+            .thumbnail.friends{
+                box-shadow : 1px 2px 8px #ff0000;
+                border-radius : 15px;
+            }
+            .thumbnail:hover{
+				text-decoration : none;
+				box-shadow 		: none;
+            }
+        .thumbnail{
+        	border     : none;
+        	height	   : 110px;
+        	background : transparent;
+        	max-width  : 110px;
+            -webkit-transition-duration : 0.7s;
+            overflow : hidden;
+            img:first-child{
+            	opacity : .6;
+            }
+            img:nth-child(2) {
+            	box-shadow: 2px 3px 4px #423C3C,inset 1px 3px 4px black;
+                border-radius : 15px;
+                position: relative;
+				top: -46px;
+            }
+            p{
+                text-align : center;
+                font-size  : 15px;
+                margin     : auto;
+                position: relative;
+				top: -64px;
+				color: white;
+				background-image: @gBlack;
+				font-weight: bold;
+				opacity: .9;
+				border-radius: 0 0 15px 15px;
+            }
+        }
+	}
+@media (min-width: 1200px) {
+ ul.thumbnails > li.span2 {
+    margin-left: 5px;
+    width : 130px;
+  }   
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css' rel='stylesheet' type='text/css'/>
+</head>
+<style>
+/* @import 'reset.css'; */
+@import 'rcarousel.css';
+   canvas { background-color: transparent; border: 1px solid gray;  top : 100px; left : 0px;position: absolute; } */
+    canvas.resize-ne { cursor: ne-resize; }
+    canvas.resize-se { cursor: se-resize; }
+    canvas.resize-sw { cursor: sw-resize; }
+    canvas.resize-nw { cursor: nw-resize; }
+    canvas.move { cursor: move; }
+    canvas.default { cursor: default; }
+    input   { margin-left: 20px; }
+    fieldset { width: 280px; float: left; }
+    .fieldset { width: 200px; float: left; }
+    #ft   { background-color: #eee; height: 70px; width: 99%; border-top: 1px solid #ccc; padding: 5px; position: absolute; top: 0; left: 0; }
+    #ft span { width: 100%; }
+    #sungae{
+    	width 	   : 70px;
+    	height 	   : 70px;
+    	background : blue;
+    	position : absolute;
+    	z-index : 9999;
+    	top : 1000px;
+    	right : 10px;
+    	visibility: 
+    }
+    .photo{
+    	float : left;
+    }
+</style>
+<body>
+<script src='http://code.jquery.com/jquery-1.8.3.js'></script>
+<script src='utilities.js'></script>
+<script src='canvasElement.js'></script>
+<script src='canvasUtil.js'></script>
+<script src='canvasImg.js'></script>
+<script src="shallowStringify.js"></script>
+<!-- <script src='test.js'></script> -->
+<script>
+function sImage(search){
+for(var i = 1 ; i <= 8 ; i++){
+	$.ajax({
+		url : 'https://ajax.googleapis.com/ajax/services/search/images'
+	  , data  : {
+		    v : '1.0',
+		    q : search ,
+		  start : i * 4,
+		  rsz  : 8
+	  }
+	  ,dataType : 'jsonp'
+	  , success : function(result){
+		  console.log(result);
+		  $.each(result.responseData.results , function(){
+			  $('<img/>').attr('src',this.tbUrl).appendTo(document.body);
+		  })
+	  }
+	});
+}
+}
+sImage('background');
+
+
+</script>
+</body>
+</html>

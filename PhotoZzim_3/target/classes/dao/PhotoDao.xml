@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PhotoDao">
+	<insert id="addPhoto" parameterType="photo">
+		insert into PHOTO(P_ID,P_NAME,P_DATE,P_PATH)
+		values(#{pId},#{pName},#{pDate},#{pPath})    
+	</insert>
+	<delete id ="removePhoto" parameterType="String">
+	    delete from PHOTO
+	    where P_PATH = #{pPath}
+	</delete>
+	<select id='getRef' parameterType="string" resultType='int'>
+	    select P_REF 
+	    from PHOTO 
+	    where P_PATH = #{pPath}
+	</select>
+	<select id="getPhoto" parameterType="String" resultType="photo">
+	    select p_id as pId, p_name as pName, p_date as pDate, p_path as pPath
+	    from PHOTO where p_id = #{pId}
+	</select>
+	<update id='changeRef'>
+		update PHOTO set P_REF = P_REF+#{num}  
+		<where>
+		    <if test='photo.pId != null'>
+				P_ID = #{photo.pId}
+		    </if>
+		    <if test='photo.pPath !=null'>
+		        P_PATH = #{photo.pPath}
+		    </if>
+		</where>
+	</update>
+	<!-- 	일별  -->
+		<select id='getDayPhoto' parameterType='photo' resultType='hashmap'>
+		select * from
+			(select 
+			p.P_ID as pId
+			,p.P_NAME as pName
+			,date_format(p.P_DATE,'%Y-%m-%d') as pDate ,
+			p.P_PATH as pPath , 
+			z.U_ID as uid
+			from PHOTO p natural join P_ZZIM z
+			where z.U_ID in 
+			(select F_ID from friend where u_no = #{uId})
+							or z.U_ID = #{uId}
+							
+			order by field (z.U_ID, #{uId}) desc
+			)as D
+		<if test='pDate != "null%"'>
+			where D.pDate LIKE #{pDate}    
+		</if> 
+		<if test='pDate == "null%"'>
+		    where D.pDate is null
+		</if>
+		group by D.pId
+	</select>
+	<!-- 	월별  -->
+	<select id='selectDate' parameterType='zzim' resultType='String'>
+	   select distinct date_format(p2.p_DATE,'%Y-%m-%d') as pDate
+		from P_ZZIM p natural join PHOTO p2
+		where p.U_ID IN (select F_ID from FRIEND
+							where U_NO = #{uId})
+		AND Z_PS = 0 OR p.U_ID = #{uId}
+		order by p2.P_DATE desc
+	</select>
+	<select id='loadDay' resultType='String'>
+	   select distinct date_format(p2.p_DATE,'%Y-%m-%d') as pDate
+		from P_ZZIM p natural join PHOTO p2
+		where p.U_ID IN (select F_ID from FRIEND
+							where U_NO = #{uId})
+		AND Z_PS = 0 OR p.U_ID = #{uId}
+		order by p2.P_DATE desc limit #{startNum}, #{nailNum}
+	</select>
+	<select id='loadMyPhoto' parameterType='zzim' resultType="photo">
+		select p.P_PATH as pPath ,p.P_DATE as pDate 
+		from PHOTO p natural join P_ZZIM p1
+		where p1.U_ID = #{uId} and Z_PS = #{zPs}
+	</select>
+	<update id='changeZps' >
+	    update P_ZZIM 
+	    set Z_PS = !Z_PS
+	    where P_ID = (select P_ID 
+	    				from PHOTO 
+	    				where P_PATH = #{pPath})
+	    AND U_ID = #{uid}
+	</update>
+	<select id='loadDetail' resultType="hashmap">
+		select * from
+		(select 
+		 p.P_NAME as pName,
+		 date_format(p.P_DATE,'%Y-%m-%d') as pDate,
+		 p.P_PATH as pPath,
+		 z.U_ID as uid,
+		 z.p_ID as pId
+		from PHOTO p natural join P_ZZIM z
+		<where>
+			<if test='photo.pDate != "null%"'>
+			     z.U_ID in (#{uId}) or p.P_DATE LIKE #{photo.pDate}
+			</if>
+			<if test="photo.pDate == 'null%'">
+			     z.U_ID in (#{uId}) or p.P_DATE is null
+			</if>	
+		</where>
+		order by field (uId, #{uId}) desc)as A
+		<where>
+			<if test='photo.pDate != "null%"'>
+			     A.pDate LIKE #{photo.pDate} and 
+			     A.uId = #{uId} or
+			     A.uId IN (select F_ID from FRIEND
+				where U_NO = #{uId})
+			</if>
+			<if test="photo.pDate == 'null%'">
+			     A.pDate is null and
+			     A.uId = #{uId} or
+			     A.uId IN (select F_ID from FRIEND
+				where U_NO = #{uId})
+			</if>	
+		</where>
+		group by A.pId
+		<if test="nailNum != 0">
+			limit #{startNum}, #{nailNum}
+		</if>
+	</select>
+	<select id="loadDetailNum" parameterType="photo" resultType="int">
+		SELECT
+		    A.ROWNUM
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        C.pDate ,C.pPath
+		    FROM
+		    <if test = 'pDate != "null%"'>
+				(select * from
+					(select 
+					p.P_ID as pId
+					,p.P_NAME as pName
+					,date_format(p.P_DATE,'%Y-%m-%d') as pDate ,
+					p.P_PATH as pPath , 
+					z.U_ID as uid
+					from PHOTO p natural join P_ZZIM z
+					where z.U_ID in 
+					(select F_ID from friend where u_no = #{uId})
+									or z.U_ID = #{uId}
+					order by field (z.U_ID, #{uId}) desc
+					)as D
+				where D.pDate LIKE #{pDate}
+				group by D.pId) C,
+		    </if>
+		    <if test=  'pDate == "null%"'>
+		        (select * from
+					(select 
+					p.P_ID as pId
+					,p.P_NAME as pName
+					,date_format(p.P_DATE,'%Y-%m-%d') as pDate ,
+					p.P_PATH as pPath , 
+					z.U_ID as uid
+					from PHOTO p natural join P_ZZIM z
+					where z.U_ID in 
+					(select F_ID from friend where u_no = #{uId})
+									or z.U_ID = #{uId}
+					order by field (z.U_ID, #{uId}) desc
+					)as D
+				where D.pDate is null
+				group by D.pId) C,
+		    </if>
+		       (SELECT @ROWNUM := 0) R
+		) A
+		WHERE A.pPath = #{pPath}
+	</select>
+	
+	<select id='getPhotoCount' parameterType ='photo' resultType='int'>
+	    select COUNT(P_ID) from PHOTO
+	    <where>
+			<if test='pDate != "null%"'>
+			     P_DATE LIKE #{pDate}
+			</if>
+			<if test="pDate == 'null%'">
+			     P_DATE is null
+			</if>
+		</where>
+	</select>
+
+	<select id='getPid' parameterType='photo' resultType='String'>
+	    select P_ID as pId from PHOTO
+	    <where>
+	        <if test = 'pPath !=null'>
+	            P_PATH = #{pPath}
+	        </if>
+	        <if test = 'pDate !=null'>
+	            P_DATE = #{pDate}
+	        </if>
+	    </where>
+	</select>
+		<select id='loadDayNum' resultType='int'>
+	    SELECT
+		    A.ROWNUM
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        C.*
+		    FROM
+				(select distinct date_format(p2.p_DATE,'%Y-%m-%d') as pDate
+		from P_ZZIM p natural join PHOTO p2
+		where p.U_ID IN (select F_ID from FRIEND
+							where U_NO = #{uId})
+		AND Z_PS = 0 OR p.U_ID = #{uId}
+		order by p2.P_DATE desc	) C,
+		       (SELECT @ROWNUM := 0) R
+		) A
+		where A.pDate = #{pDate};
+	</select>
+	<select id="loadSpread" resultType="hashmap">
+		select * from
+			(select 
+				 p.P_NAME as pName,
+				 date_format(p.P_DATE,'%Y-%m-%d') as pDate,
+				 p.P_PATH as pPath,
+				 z.P_ID as pId,
+				 z.U_ID as uid
+			from PHOTO p natural join P_ZZIM z
+			where z.U_ID in 
+				(select F_ID from friend where u_no = #{uId})
+				or z.U_ID = #{uId}
+			order by field (z.U_ID, #{uId}) desc)as A
+			group by A.pId
+			limit #{startNum}, #{nailNum}
+	</select>
+	<select id="loadSpreadNum" resultType="int">
+	    SELECT
+		    A.ROWNUM
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        C.pPath
+		    FROM
+				(select * from
+			(select 
+				 p.P_PATH as pPath,
+				 z.P_ID as pId
+			from PHOTO p natural join P_ZZIM z
+			where z.U_ID in 
+				(select F_ID from friend where u_no = #{uId})
+				or z.U_ID = #{uId}
+			order by field (z.U_ID, #{uId}) desc
+			)as D
+			group by D.pId) C,
+		       (SELECT @ROWNUM := 0) R
+		) A
+		where A.pPath = #{pPath}
+	</select>
+	<select id="loadUserPhoto" resultType="hashmap">
+		SELECT 
+		A.pName, A.pDate, A.pPath, A.pId, A.uid
+		FROM (SELECT @ROWNUM := @ROWNUM + 1 AS ROWNUM, 
+		C.pName, C.pDate, C.pPath, C.pId, C.uid FROM 
+		(select 
+		p.P_NAME as pName, 
+		p.P_DATE as pDate, 
+		p.P_PATH as pPath, 
+		z.P_ID   as pId, 
+		z.U_ID   as uid 
+		from PHOTO p natural join P_ZZIM z 
+		where z.U_ID = #{uId} and z.Z_PS = 1
+		order by pDate desc  ) C, 
+		(SELECT @ROWNUM := 0) R ) A
+		limit #{startNum}, #{nailNum}
+	</select>
+	<select id="loadUserPhotoNum" resultType="int">
+	    SELECT
+		A.ROWNUM
+		FROM
+		(
+			SELECT
+				@ROWNUM := @ROWNUM + 1 AS ROWNUM,
+				C.pPath
+			FROM
+			(select 
+				 p.P_NAME as pName,
+				 p.P_DATE as pDate,
+				 p.P_PATH as pPath,
+				 z.P_ID as pId,
+				 z.U_ID as uid
+			from PHOTO p natural join P_ZZIM z
+			where z.U_ID = #{uId}
+			order by pDate desc) C,
+			   (SELECT @ROWNUM := 0) R
+		) A
+		where A.pPath = #{pPath}
+	</select>
+	
+	<delete id="removeAlbum" parameterType="string">
+	    delete from PHOTO
+	    where P_ID = #{aPid}
+	</delete>
+</mapper>

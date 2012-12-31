@@ -1,0 +1,15 @@
+<header>
+<a href='#add_group'></a>
+<span>그룹 추가</span>
+</header>
+<section class='group-wrap wrap'>
+{{#data}}
+<div class='box group'><a href='#g_image' class='thumbnail'><img src='../img/group-icon.jpg'></a>
+{{#idCheck uId}}
+<a href='#g_name'>{{gName}}</a>
+{{else}}
+<a href='#g_name' class='mine'>{{gName}}</a>
+{{/idCheck}}
+</div>
+{{/data}}
+</section>

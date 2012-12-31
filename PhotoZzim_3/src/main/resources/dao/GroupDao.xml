@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.GroupDao">
+    <select id="loadGroup" parameterType="string" resultType="hashmap">
+        select g.G_ID as gId, g.G_NAME as gName, g.U_ID1 as uId ,p.p_PATH as pPath
+        	from g_user u natural join G_GROUP g  join PHOTO p 
+		on g.G_PID = p.P_ID
+		where u_id2 = #{value} and u.G_PS = 1
+    </select>
+    <delete id="groupOut" parameterType="groupuser">
+        delete from g_user where g_id = #{gId} and u_id2 = #{uId};
+    </delete>
+    <select id="searchGroup" resultType="group">
+        select G_ID as gId, G_NAME as gName, U_ID1 as uId from G_GROUP 
+        where G_NAME like #{gName}
+    </select>
+    
+    <insert id="groupEnter" parameterType="groupuser">
+		insert G_USER(G_ID, U_ID2, G_PS) VALUES(#{gId}, #{uId}, #{gPs} )        
+    </insert>
+    <insert id="groupCreate" parameterType="group">
+        insert into G_GROUP(G_NAME, U_ID1) values(#{gName}, #{uId});
+    </insert>
+    <select id="selectGid" parameterType="group" resultType="int">
+        select G_ID from G_GROUP where G_NAME = #{gName} and U_ID1 = #{uId}
+    </select>
+    
+    <delete id="groupRemove" parameterType="int">
+		delete from G_GROUP where G_ID = #{gId}
+    </delete>
+    <delete id="groupUserRemove" parameterType="int">
+        delete from G_USER where G_ID = #{gId}
+    </delete>
+    <select id="groupPhotoExist"  parameterType="int" resultType="int">
+        select COUNT(*) from G_PHOTO where G_NO = #{gId}
+    </select>
+    <delete id="groupAllPhotoRemove" parameterType="int">
+        delete from G_PHOTO where G_NO = #{gId}
+    </delete>
+    
+    
+    <select id="loadGroupUser" resultType="hashmap">
+    	select 
+    	g.G_UID as gUid,
+    	g.G_ID as gId,
+    	g.U_ID2 as uId,
+    	u.U_NAME as name
+    	 from G_USER g join USER u
+    	 on g.U_ID2 = u.U_ID
+    	 where G_ID = #{gId}
+    	 	AND G_PS = 1;
+    </select>
+    <select id="loadGroupPhoto" resultType="hashmap">
+		select p.P_ID as pId,
+			p.P_NAME as pName,
+			date_format(p.P_DATE,'%Y-%m-%d') as pDate
+			,p.P_PATH as pPath
+			,z.U_ID as uid
+		from PHOTO p natural join P_ZZIM z
+			where z.z_id in 
+			(select z_id from g_photo where g_no = #{gId})
+		limit #{startNum}, #{nailNum}
+    </select>
+    <select id="loadGroupUserNum">
+        SELECT
+		    A.ROWNUM
+		FROM
+		(
+		    SELECT
+		        @ROWNUM := @ROWNUM + 1 AS ROWNUM,
+		        C.pPath
+		    FROM
+				(select 
+			 p.P_PATH as pPath
+		from PHOTO p natural join P_ZZIM z
+		where z.Z_ID in 
+			(select z_id from g_photo where g_no = #{gId})) C,
+		       (SELECT @ROWNUM := 0) R
+		) A
+		WHERE A.pPath = #{pPath};
+    </select>
+    <insert id="groupPhotoAdd">
+        insert into G_PHOTO(Z_ID, G_NO) 
+			values(
+			(select Z_ID from P_ZZIM 
+			where P_ID = 
+			(select P_ID from PHOTO 
+			where P_PATH = #{pPath}))
+			,#{gId})
+    </insert>
+    <delete id="groupPhotoRemove">
+        delete from G_PHOTO 
+			where Z_ID = (select Z_ID from P_ZZIM 
+			where P_ID = 
+			(select P_ID from PHOTO 
+			where P_PATH = #{pPath}) )
+			and G_NO = #{gId}
+    </delete>
+    <select id="loadGroupInvite" parameterType="string" resultType="hashmap">
+        select g.G_ID as gId, g.G_NAME as gName, g.U_ID1 as uId , p.p_Path as pPath , u2.U_NAME as name
+        	from g_user u natural join G_GROUP g join USER u2 on u2.U_ID = g.U_ID1 join PHOTO p on p.P_ID = g.G_PID
+		where u_id2 = #{uId} and u.G_PS = 0
+    </select>
+    <update id="groupUserPermit" parameterType="groupuser">
+        update G_USER set G_PS = #{gPs}
+        where G_ID = #{gId} and U_ID2 = #{uId}
+    </update>
+    
+    <update id="updateGname" parameterType='group'>
+        update G_GROUP set G_NAME = #{gName}
+		where G_ID = #{gId}
+	</update>
+	
+     <select id="getGpsCount" parameterType="string" resultType="int">
+        select COUNT(*) from G_USER where U_ID2 = #{uId} and G_PS = 0 
+    </select>
+</mapper>

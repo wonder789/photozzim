@@ -1,0 +1,28 @@
+<ul class="nav">
+	<li><a href="#photo">Photo</a></li>
+	<li><a href="#album">Album</a></li>
+	<li><a href="#upload">Upload</a></li>
+	<li><a href='#myphoto'><img src={{picture}} alt="">
+		{{name}}</a>
+	</li>
+	<li class='dropdown'><a class='dropdown-toggle'
+		data-toggle='dropdown' href='#'> <span class="caret"> 
+		</span>
+	</a>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+			<li class="dropdown-submenu pull-left">
+			    <a tabindex="-1" href="#">친구초대<span class='label labe-info'>{{flength}}</span></a>
+			    <ul class="dropdown-menu f_invite">
+			    </ul>
+			  </li>
+			<li class="dropdown-submenu pull-left">
+			    <a tabindex="-1" href="#">그룹초대<span class='label labe-info'>{{glength}}</span></a>
+			    <ul class="dropdown-menu g_invite">
+			    </ul>
+			  </li>
+			  <li>
+			    <a tabindex="-1" href="#logout">로그아웃</a>
+			  </li>
+		</ul>
+	</li>
+</ul>
