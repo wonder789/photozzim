@@ -9,7 +9,7 @@ define( [ 'jquery' , 'text!template/studentList.tmpl' ],
 				  template : template
 				, context  : this.model.toJSON()
 			  });
-		  return this;
+			  return this;
 	  	}
-	});
+	 });
 });
