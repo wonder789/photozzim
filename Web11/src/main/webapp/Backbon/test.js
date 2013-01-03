@@ -2,24 +2,17 @@ requirejs.config({
 	 baseUrl : 'scripts'
    , appDir  : './'
    , paths   : {
-	   	   view : '../view'
-	 , template : '../template'
-	 ,       vo : '../vo'
-     ,    model : '../model'
+	   	   view   : '../view'
+	 , template   : '../template'
+	 ,       vo   : '../Models/vo'
+	 , collection : '../Models/Collection'
 	}
 });
-require( [ 'jquery', 'handlebars', 'underscore', 'backbone' , 'backbone.localStorage']
+require( [ 'jquery', 'handlebars', 'underscore', 'backbone' , 'backbone.customSync']
 	,function ( $ , handlebar ){
 	$.fn.render = function( opts ){
 		$( this ).append( Handlebars.compile( opts.template ) ( opts.context ) );
 	};
-	require( [ 'vo/Student' ],
-			function( Student ){
-		var student = new Student();
-		student.save();
-	});
-	require( [ 'model/studentDao' , 'view/studentListView' ] ,
-			function( studentList , ListView ){
-
-	});
+	
+	
 });

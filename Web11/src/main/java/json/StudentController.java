@@ -24,10 +24,6 @@ private StudentDao studentDao;
 	public void setStudentDao(StudentDao studentDao) {
 	this.studentDao = studentDao;
 }
-	@RequestMapping("index")
-	public String index() throws Exception {
-		return "redirect:/Backbon/Backbon.html";
-	}
 	@RequestMapping(value="add",method=RequestMethod.POST)
 	@ResponseBody
 	public ActionResult add(Student student) throws Exception{

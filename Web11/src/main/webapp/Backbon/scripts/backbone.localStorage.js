@@ -47,6 +47,7 @@ _.extend(Backbone.LocalStorage.prototype, {
     this.localStorage().setItem(this.name+"-"+model.id, JSON.stringify(model));
     this.records.push(model.id.toString());
     this.save();
+    
     return model.toJSON();
   },
 
