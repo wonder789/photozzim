@@ -1,0 +1,22 @@
+<fieldset>
+<legend>학생 {{type}}</legend>
+<input type='hidden' id='no' name='no' value='{{no}}'>
+<ul>
+<li><label for = 'name'>학생 이름 : <input type='text' size = '30' name = 'name' id = 'name' value='{{name}}'></label></li>
+<li><label for = 'tel'>학생 번호 : <input type='text' size = '30' name = 'tel' id = 'tel' value='{{tel}}'></label></li>
+<li>
+	<label for = 'address'>학생 주소 : 
+	<textarea cols = '40' rows = '15' name = 'address' id = 'address'>{{address}}</textarea>
+	</label>
+</li>
+<li><label for = 'age'>학생 나이 : <input type='text' size = '10' name = 'age' id = 'age' value='{{age}}'></label></li>
+<li><label for = 'working'>재직 여부 : {{cb_working working}} </label></li>
+{{#formType type}}
+<li><input type='button' value='추가' id='btn_add'></li>
+{{else}}
+<li><input type='button' value='수정' id='btn_update'>
+	<input type='button' value='삭제' id='btn_delete'>
+</li>
+{{/formType}}
+</ul>
+</fieldset>

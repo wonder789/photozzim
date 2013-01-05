@@ -2,24 +2,23 @@ requirejs.config({
 	 baseUrl : 'scripts'
    , appDir  : './'
    , paths   : {
-	   		  async: 'async'
-	 ,	    view   : '../View'
-	 , template   : '../template'
-	 ,       vo   : '../Models/vo'
-	 , collection : '../Models/Collection'
+	       views  : '../views'
+	 , templates  : '../templates'
+	 ,   models   : '../models'
+	 ,collections : '../collections'
+	}
+	, shim  : {
+					'backbone' : [ 'underscore' , 'jquery' ]
+	 ,   'handlebars.helper' : [ 'handlebars' ]
+	 , 'backbone.customSync' : [ 'backbone' ]
 	}
 });
 require( [ 
-           'jquery'
-         , 'handlebars'
-         , 'handlebars.helper'
-         , 'underscore'
-         , 'backbone'
+          'handlebars.helper'
          , 'backbone.customSync'
          ]
-	,function ( $ ){
-	
-	require( [ 'view/mainView' ],
+	,function ( ){
+	require( [ 'views/mainView' ],
 			function ( MainView ){
 		window.MainView = new MainView();
 	});

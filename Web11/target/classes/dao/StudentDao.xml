@@ -19,7 +19,7 @@
 	</select>
 	<select id='getStudent' parameterType="String" resultType='vo.Student'>
 		<include refid='selectStudent'/>
-		where TEL=#{TEL}
+		where SNO=#{no}
 	</select>
 	<delete id='removeStudent' parameterType="String" >
 		delete 

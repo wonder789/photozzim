@@ -38,11 +38,11 @@ public class StudentMySQLDao implements StudentDao {
 		}
 	}
 
-	public Student getStudent(String tel) throws DaoException{
+	public Student getStudent(String no) throws DaoException{
 		SqlSession sqlSession  = null;
 		try{
 			sqlSession = sqlSessionFactory.openSession();
-			return sqlSession.selectOne("dao.StudentDao.getStudent", tel);
+			return sqlSession.selectOne("dao.StudentDao.getStudent", no);
 		}catch(Exception e){
 			throw new DaoException(e);
 		}finally{

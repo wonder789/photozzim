@@ -1,5 +1,5 @@
-define( [ 'jquery', 'vo/Student' ],
-		function( $ , Student ){
+define( [ 'models/Student' ],
+		function( Student ){
 	var StudentList =  Backbone.Collection.extend({
 		 model : Student
       ,  url  : '../json/student'

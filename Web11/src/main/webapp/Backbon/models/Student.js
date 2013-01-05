@@ -4,7 +4,7 @@ define( [ 'jquery' ]
 		initialize : function () {
 		},
 		url : '../json/student',
-		idAttribute : 'sno'
+		idAttribute : 'no'
 	});
 	
 	return Student;

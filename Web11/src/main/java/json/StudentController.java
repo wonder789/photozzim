@@ -47,11 +47,11 @@ private StudentDao studentDao;
 		}
 	}
 	
-	@RequestMapping("{tel}")
+	@RequestMapping("{no}")
 	@ResponseBody
-	public ActionResult detail(@PathVariable String tel) throws Exception{
+	public ActionResult detail(@PathVariable String no) throws Exception{
 		try{
-			return new ActionResult().setData(studentDao.getStudent(tel))
+			return new ActionResult().setData(studentDao.getStudent(no))
 								  .setStatus(ActionResult.SUCCESS);
 		}catch(Exception e){
 			return new ActionResult().setData(e.toString())
