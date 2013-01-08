@@ -6,6 +6,7 @@ requirejs.config({
 	 , templates  : '../templates'
 	 ,   models   : '../models'
 	 ,collections : '../collections'
+	 ,router      : '../router'
 	}
 	, shim  : {
 					'backbone' : [ 'underscore' , 'jquery' ]
@@ -16,11 +17,12 @@ requirejs.config({
 require( [ 
           'handlebars.helper'
          , 'backbone.customSync'
-         ]
+         ]	
 	,function ( ){
-	require( [ 'views/mainView' ],
-			function ( MainView ){
-		window.MainView = new MainView();
+	require( [ 'views/mainView' , 'router/studentRouter' ],
+			function ( MainView  , StudentRouter ){
+			window.appView = new MainView;
+		var studentRouter = new StudentRouter();
 	});
 	
 });

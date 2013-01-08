@@ -22,6 +22,7 @@ define( [ 'require' , 'text!templates/studentList.tmpl' ],
 			   .fetch({
 				   success : function ( student ){
 				    $('#main').trigger('showForm' , [ 'true' , student.toJSON() ]);
+				    Backbone.history.navigate( "detail/" + student.id );
 				   }
 			   });
 		  	
