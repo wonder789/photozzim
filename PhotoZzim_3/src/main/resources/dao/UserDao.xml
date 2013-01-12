@@ -3,19 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.UserDao">
-
+	<sql id ='selectUser'>
+		select U_ID as uId , U_NAME as uName from USER
+	</sql>
     <insert id="addUser" parameterType="user">
       insert into USER
       values(#{uId},#{uName})
   	</insert>
+  	<select id='getUserCheck' parameterType="user">
+  	    select COUNT(U_ID) from USER 
+  	    where U_ID = #{uId}
+  	</select>
   	
     <select id="getUserAll" resultType="user">
-        select U_ID as uId , U_NAME as uName from USER
+		<include refid="selectUser"/>
     </select>
     
 	<!-- 유저중 친구목록을 제외 나 제외  -->
   	<select id="getUserList" parameterType ="user" resultType="user">
-        select U_ID as uId , U_NAME as uName from USER
+        <include refid="selectUser"/>
         where U_ID NOT IN (select F_ID from FRIEND
         					where U_NO =#{uId})
         AND U_ID != #{uId}

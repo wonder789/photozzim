@@ -51,4 +51,14 @@ public class UserMySqlDao implements UserDao{
 	}
 
 
+	@Override
+	public int getUserCheck(int uId) throws DaoException {
+		SqlSession sqlSession = null;
+		sqlSession = sqlSessionFactory.openSession();
+		int count = sqlSession.selectOne("dao.UserDao.getUserCheck",uId);
+		sqlSession.close();
+		return count;
+	}
+
+
 }

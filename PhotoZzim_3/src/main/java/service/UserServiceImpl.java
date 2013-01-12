@@ -38,4 +38,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserList(user);
 	}
 
+	@Override
+	public int getUserCheck(int uId) throws Exception {
+		return userDao.getUserCheck(uId);
+	}
+
 }

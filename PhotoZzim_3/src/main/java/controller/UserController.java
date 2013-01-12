@@ -11,7 +11,7 @@ import vo.User;
 import dao.UserDao;
 
 @Controller
-@RequestMapping("/photo")
+@RequestMapping("/app")
 public class UserController extends BaseController {
 	private UserDao userDao;
 
