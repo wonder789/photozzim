@@ -1,0 +1,121 @@
+@import 'main_upload.less';
+@import 'main_photo.less';
+@import 'main_modal.less';
+@import 'main_group.less';
+@import 'main_subcon.less';
+@import 'main_mypage.less';
+@import 'main_album.less';
+@import 'main_photomenu.less';
+body{
+	background : url('../img/body_bg.jpg') repeat;
+}
+.main-container{
+    width: 95%;
+    height: @basicHeight;
+    min-height: @basicHeight;
+    margin: 10px auto;
+    border-radius: @containerRadius;
+    //photo nav
+    .nav-wrap{
+        overflow :hidden;
+        background : transparent;
+        margin-bottom : 20px;
+        .nav{
+            overflow      : hidden;
+            background    : #F0E5E5;
+            margin        : 0;
+            li{
+                a{
+                	color : rgba(60, 58, 57, 0.68);
+                   &.none {
+                        display : none;   
+                   }
+                    &:hover{
+                        text-shadow : 1px 1px 3px;
+                        span{
+                          color : rgba(60, 58, 57, 0.68);
+                        }
+                    }
+                }
+                .entypo,.status{
+                        font-size : 40px;
+                        float :left;
+                        color : rgba(60, 58, 57, 0.68);
+                }
+                & > span{
+                    &.status {
+                        font-size : 14px;
+                    }                    
+                    padding : 8px 12px;   
+                }
+                .status.none {
+                    display : none;
+                }                
+            }
+        }
+    }
+}
+// modal
+
+
+// nav
+div.navbar{
+	    .navbar-inner{
+	    	background-image: -webkit-linear-gradient(top, #A90329 0%,#8F0222 44%,#6D0019 100%);
+			border: none;
+			box-shadow: 1px 2px 10px #5F5555;
+	    }
+	ul.nav{
+	    a.dropdown-toggle{
+	        width : 90px;
+	    }   
+	    & > li{
+	    	& > a{
+				color		: #CCBEBE;
+				text-shadow : none;
+	    		&[href*=myphoto]{
+		    		padding : 9px 12px;
+		    		img{
+			    		width: 25px;
+						height: 25px;
+						border-radius: 5px;
+						margin-right: 4px;
+						border: 1px solid #DDD;
+		    		}
+	    		}
+	    	}
+	    }
+	    
+	    .dropdown-menu{
+	         img{
+	            width : 25px;
+	            height : 25px;
+	         }
+	    }
+	}
+}
+.entypo{
+    font-family : 'entypo';
+}
+.subnav-fixed{
+    position :fixed;
+    top      : 55px;
+}
+// Banner
+a[href*=l-menu]{
+	position: fixed;
+	top: 100px;
+	left: -10px;
+	z-index: 999;
+	width: 61px;
+	height: 32px;
+	background: url('../img/bookmark.png') no-repeat;
+}
+.right-menu{
+    position: fixed;
+    top: 100px;
+    right: 3px;
+}
+.none{
+	display : none;
+}

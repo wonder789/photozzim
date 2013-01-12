@@ -1,0 +1,30 @@
+<div class="modal hide fade" id='g_add'>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>{{title}}</h3>
+  </div>
+  <div class="modal-body">
+  <form id='g_form'>
+  <ul class='unstyled'>
+  	<li>
+  	{{#if gName}}
+  	<label for='g_name' class='text-info'>그룹 이름 : </label><span id='g_name'>{{gName}}</span>
+	{{else}}
+  	<label for='g_name' class='text-info'>그룹 이름 :</label>
+    <input id='g_name' type='text' class='span3' placeholder='추가할 그룹 이름 입력'>
+    {{/if}}
+    </li>
+    <li>
+    <label for='g_member' class='text-info'>추가할 멤버 : </label>
+    <input id='g_member' type='text' class='search-query span3'
+     data-placement='right' title='친구 찾기'placeholder='그룹에 추가할 멤버 입력'>
+     </li>
+  </ul>
+  </form>
+    <div class='namebox'></div>
+  </div>
+  <div class="modal-footer">
+    <a href="#g_close" class="btn btn-primary">닫기</a>
+    <a href="#g_add" class="btn btn-primary">{{btnLabel}}</a>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+{{#this}}
+	   <li><a  tabindex='-1' href='#f_invite'><img src='{{picture}}'>{{name}}</a></li>
+{{/this}}

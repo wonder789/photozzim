@@ -1,0 +1,9 @@
+{{#this}}
+<div class='groupbox'>
+<div class='round-wrap'>
+	<img src = '../img/group-icon.jpg'>
+	<div class='img-mask'></div>
+</div>
+<span class='gName'>{{gName}}</span>
+</div>
+{{/this}}
