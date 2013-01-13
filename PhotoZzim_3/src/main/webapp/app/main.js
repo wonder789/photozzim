@@ -16,7 +16,7 @@ requirejs.config({
 	 , 'facebook' 			 : [ 'all' ]
 	}
 });
-require( [ 'jquery' , 'routers/appRouter' ] ,
+require( [ 'jquery' , 'routers/appRouter' , 'backbone.customSync'] ,
 		function ( $ , AppRouter) { 
 	var appRouter = new AppRouter();
 });

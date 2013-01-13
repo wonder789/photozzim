@@ -1,7 +1,0 @@
-<div id="carousel">
-	{{#this}}
-		<div class='m_box'><img src='{{picture}}'><span>{{name}}</span><a href='#g_ban'></a></div>
-	{{/this}}
-</div>
-<a href="#" class='entypo' id="ui-carousel-next"><span class='entypo'></span>&#59230;</a>
-<a href="#" class='entypo' id="ui-carousel-prev"><span class='entypo'></span>&#59229;</a>

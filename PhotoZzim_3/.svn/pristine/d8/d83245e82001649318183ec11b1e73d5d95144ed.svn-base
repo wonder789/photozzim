@@ -1,3 +1,0 @@
-    {{#this}}
-    	<a href='#pfriend'><img src='https://graph.facebook.com/{{uId}}/picture'><span>{{uName}}</span></a>
-    {{/this}}

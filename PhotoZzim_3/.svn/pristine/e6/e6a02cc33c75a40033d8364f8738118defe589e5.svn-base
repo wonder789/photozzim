@@ -1,5 +1,0 @@
-driver=com.mysql.jdbc.Driver
-url=jdbc:mysql://localhost/photo1
-username=study
-password=study
-#222.108.111.219

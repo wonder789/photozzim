@@ -1,3 +1,0 @@
-    {{#this}}
-    	<a href='#group'><img src='../img/group-icon.jpg'><span>{{gName}}</span></a>
-    {{/this}}

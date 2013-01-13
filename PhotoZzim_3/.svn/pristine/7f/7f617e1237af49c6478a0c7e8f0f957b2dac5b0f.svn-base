@@ -1,6 +1,0 @@
-{{#this}}
-<div class='item' data-pk='{{aId}}'>
-<img src='../../upload/photo/{{pPath}}'>
-<p>{{TITLE}}</p>
-</div>
-{{/this}}

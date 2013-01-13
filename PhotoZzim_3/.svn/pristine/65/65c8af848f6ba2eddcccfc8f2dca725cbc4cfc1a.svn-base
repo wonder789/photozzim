@@ -1,4 +1,0 @@
-  {{#friendList}}
-  	<div><a href='#f_image' class='thumbnail'><img src={{picture}}></a><a href='#f_name'>{{name}}</a></div>
-  {{/friendList}}
- 
